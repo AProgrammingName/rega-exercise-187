@@ -1,0 +1,72 @@
+//AUTHOR : Nathan Rega
+//COURSE : CPT187
+//PURPOSE : Stores all of the orders that a customer wants.
+//CREATEDATE : 2/16/22
+package edu.cpt187.rega.exercise6;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class WriteOrder 
+{
+	//declare and initialize class attributes
+	private boolean fileFoundFlag;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	//constructors
+	//non-default constructor
+	WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	} //END OF non-default constructor
+	
+	//setters
+	//setter to assign
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, 
+			int borrowedQuantity, double borrowedOrderCost)
+	{
+		//try block
+		try
+		{
+			//instantiation statement for PrintWriter
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f", borrowedItemID, borrowedItemName, borrowedItemPrice, 
+					borrowedQuantity, borrowedOrderCost);
+			
+			recordCount++;
+			
+			filePW.close();
+		} //END OF try
+		
+		//catch block
+		catch (IOException ex)
+		{
+			fileFoundFlag = false;
+		} //END OF catch
+		
+	} //END OF setWriteOrder
+	
+	
+	//getters
+	//getter that returns fileFoundFlag
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	} //END OF getFileFoundFlag
+	
+	//getter that returns masterFileName
+	public String getFileName()
+	{
+		return masterFileName;
+	} //END OF getFileName
+	
+	//getter that returns record count
+	public int getRecordCount()
+	{
+		return recordCount;
+	} //END OF getRecordCount
+
+} //END OF WriteOrder
